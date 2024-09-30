@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--9nvj^)472tms4^(@@hlm%-#u3+p4bbmh=3j2!!(q)fv&3#b73"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -135,12 +136,15 @@ STORAGES ={
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+# con python manage.py collectstatic centralizamos todos los arhivos y al usar ngiogx no es necesario usar whitenoise
+STATIC_ROOT = "staticfiles"
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-AWS_ACCESS_KEY_ID =  "YOUR AWS_ACCESS_KEY_ID"
-AWS_SECRET_ACCESS_KEY = "YOUR AWS_SECRET_ACCESS_KEY"
-AWS_STORAGE_BUCKET_NAME = "YOUR AWS_STORAGE_BUCKET_NAME"
+AWS_ACCESS_KEY_ID =  config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 
 AWS_QUERYSTRING_AUTH = False
 
